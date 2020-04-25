@@ -1,3 +1,5 @@
+[![Build Status](https://tchen25.visualstudio.com/Telestrations%20Online/_apis/build/status/theodoreschen.ng-telestrations-players?branchName=master)](https://tchen25.visualstudio.com/Telestrations%20Online/_build/latest?definitionId=7&branchName=master)
+
 # NgTelestrationsPlayers
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
