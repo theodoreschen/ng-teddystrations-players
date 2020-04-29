@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { GameState } from '../game-server-types';
 import { LoggerService } from '../logger.service';
 import { GameService } from '../game.service';
@@ -11,7 +11,7 @@ import { interval } from 'rxjs';
   styleUrls: ['./game-master.component.css']
 })
 export class GameMasterComponent implements OnInit, OnDestroy {
-  develMode: boolean;
+  @Input() develMode: boolean;
   statePoller: any;
   state: GameState;
   doStatePolling: boolean;
@@ -25,7 +25,7 @@ export class GameMasterComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.develMode = this.log.develMode;
+    this.develMode = false;
     this.doStatePolling = true;
     this.startPolling();
 
@@ -56,7 +56,7 @@ export class GameMasterComponent implements OnInit, OnDestroy {
     this.doStatePolling = !this.doStatePolling;
   }
 
-  gameUidHandler(event): void {
+  gameUidHandler(event: string): void {
     this.playerUid = event;
     this.cookie.set('teddystrations-puid', event, 1);
   }
