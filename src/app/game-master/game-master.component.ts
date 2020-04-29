@@ -16,6 +16,7 @@ export class GameMasterComponent implements OnInit, OnDestroy {
   state: GameState;
   doStatePolling: boolean;
   playerUid: string;
+  pollCounter: number;
 
   constructor(
     private log: LoggerService,
@@ -36,9 +37,10 @@ export class GameMasterComponent implements OnInit, OnDestroy {
   }
 
   startPolling(): void {
-    this.statePoller = interval(2000).subscribe(_ => {
+    this.statePoller = interval(2000).subscribe(count => {
       this.game.fetchGameState().subscribe(state => {
         this.state = state;
+        this.pollCounter = count + 1;
       });
     });
   }
