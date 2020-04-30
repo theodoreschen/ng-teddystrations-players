@@ -1,0 +1,7 @@
+<div>
+  <h1>Enter name to join game</h1>
+  <form (ngSubmit)="onSubmit();">
+    <input id="player-name" name="player-name" [(ngModel)]="playerName" placeholder="name" />
+    <button type="submit">&gt;</button>
+  </form>
+</div>

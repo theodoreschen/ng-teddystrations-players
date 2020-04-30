@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoggerWidgetComponent } from './logger-widget/logger-widget.component';
 import { GameMasterComponent } from './game-master/game-master.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoggerWidgetComponent,
-    GameMasterComponent
+    GameMasterComponent,
+    SignInComponent
   ],
   imports: [
     FormsModule,

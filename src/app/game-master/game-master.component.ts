@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { GameState } from '../game-server-types';
+import { GameState, Player } from '../game-server-types';
 import { LoggerService } from '../logger.service';
 import { GameService } from '../game.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -56,9 +56,9 @@ export class GameMasterComponent implements OnInit, OnDestroy {
     this.doStatePolling = !this.doStatePolling;
   }
 
-  gameUidHandler(event: string): void {
+  playerUidHandler(event: string): void {
     this.playerUid = event;
-    this.cookie.set('teddystrations-puid', event, 1);
+    this.cookie.set('tedstrations-puid', event, 1);
   }
 
 }

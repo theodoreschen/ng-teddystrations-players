@@ -31,30 +31,12 @@ export class GameService{
       );
   }
 
-  fetchAllPlayers(uid: string): Observable<any> {
-    let args = {uid: uid};
-    return this.http.get<Player[]>(`${gameServerUrl}/game/players`, {params: args})
+  addNewPlayer(name: string): Observable<Player> {
+    let jsonBody = {name: name};
+    return this.http.post<Player>(`${gameServerUrl}/player/add`, jsonBody, this.jsonHttpOptions)
       .pipe(
-        tap(result => this.log.DEBUG("GameService.fetchAllPlayers", `Retrieved ${JSON.stringify(result)}`)),
-        catchError(this.handleError<any>("GameService.fetchAllPlayers"))
-      );
-  }
-
-  authenticateGame(uid: string): Observable<any> {
-    let args = {uid: uid};
-    return this.http.put(`${gameServerUrl}/game/authenticate`, '', {params: args})
-      .pipe(
-        tap(_ => this.log.DEBUG("GameService.authenticateGame", "Successfully authenticated!")),
-        catchError(this.handleError<any>("GameService.authenticateGame"))
-      );
-    }
-
-  resetGame(uid: string): Observable<any> {
-    let args = {uid: uid};
-    return this.http.delete(`${gameServerUrl}/game`, {params: args})
-      .pipe(
-        tap(_ => this.log.DEBUG("GameService.resetGame", "Successfully reset game")),
-        catchError(this.handleError<any>("GameService.resetGame"))
+        tap(result => this.log.DEBUG("GameService.addNewPlayer", `Retrieved ${JSON.stringify(result)}`)),
+        catchError(this.handleError<any>("GameService.addNewPlayer"))
       );
   }
 
