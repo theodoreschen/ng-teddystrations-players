@@ -40,6 +40,10 @@ export class GameMasterComponent implements OnInit, OnDestroy {
     this.statePoller = interval(2000).subscribe(count => {
       this.game.fetchGameState().subscribe(state => {
         this.state = state;
+        if (state.state === 'unauthenticated' && this.cookie.check('tedstrations-puid')) {
+          this.cookie.delete('tedstrations-puid');
+          this.playerUid = '';
+        }
         this.pollCounter = count + 1;
       });
     });
