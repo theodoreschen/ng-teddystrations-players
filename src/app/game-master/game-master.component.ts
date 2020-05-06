@@ -37,20 +37,21 @@ export class GameMasterComponent implements OnInit, OnDestroy {
   }
 
   startPolling(): void {
-    this.statePoller = interval(2000).subscribe(count => {
-      this.game.fetchGameState().subscribe(state => {
-        this.state = state;
-        if (state.state === 'unauthenticated' && this.cookie.check('tedstrations-puid')) {
-          this.cookie.delete('tedstrations-puid');
-          this.playerUid = '';
-        }
-        this.pollCounter = count + 1;
-      });
-    });
+    // this.statePoller = interval(2000).subscribe(count => {
+    //   this.game.fetchGameState().subscribe(state => {
+    //     this.state = state;
+    //     if (state.state === 'unauthenticated' && this.cookie.check('tedstrations-puid')) {
+    //       this.cookie.delete('tedstrations-puid');
+    //       this.playerUid = '';
+    //     }
+    //     this.pollCounter = count + 1;
+    //   });
+    // });
+    this.state = <GameState>{state: "round_active", message: "1"};
   }
 
   stopPolling(): void {
-    this.statePoller.unsubscribe();
+    // this.statePoller.unsubscribe();
   }
 
   toggleStatePolling(): void {

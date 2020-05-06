@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { LoggerWidgetComponent } from './logger-widget/logger-widget.component';
 import { GameMasterComponent } from './game-master/game-master.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { AtramentComponent } from './atrament/atrament.component';
+import { GamePlayComponent } from './game-play/game-play.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoggerWidgetComponent,
     GameMasterComponent,
-    SignInComponent
+    SignInComponent,
+    AtramentComponent,
+    GamePlayComponent
   ],
   imports: [
     FormsModule,
