@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Atrament } from 'atrament';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+// const Atrament = require('atrament');
+import Atrament from 'atrament';
 
 @Component({
   selector: 'atrament',
@@ -7,14 +8,36 @@ import { Atrament } from 'atrament';
   styleUrls: ['./atrament.component.css']
 })
 export class AtramentComponent implements OnInit {
-  canvas: any;
   sketchpad: any;
+
+  @Input() saveButtonName: string;
+  @Output() saveImageEmitter = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.canvas = document.querySelector("#sketchpad");
-    this.sketchpad = new Atrament(this.canvas);
+    if (this.saveButtonName === "") this.saveButtonName = "Save";
+    let canvas = document.querySelector("#sketchpad");
+    this.sketchpad = new Atrament(canvas);
+  }
+
+  clearDrawing(): void {
+    this.sketchpad.clear();
+  }
+
+  toggleDraw(): void {
+    this.sketchpad.mode = "draw";
+    this.sketchpad.weight = 5;
+  }
+
+  toggleErase(): void {
+    this.sketchpad.mode = "erase";
+    this.sketchpad.weight = 15;
+  }
+
+  saveImage(): void {
+    const dataURL: string = <string>this.sketchpad.toImage();
+    this.saveImageEmitter.emit(dataURL);
   }
 
 }

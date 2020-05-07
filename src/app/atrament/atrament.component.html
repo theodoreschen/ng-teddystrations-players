@@ -1,1 +1,21 @@
-<canvas id="sketchpad"></canvas>
+<section id="drawing-tools">
+  <div>
+    <input type="radio" name="toggle-mode" value="draw" (change)="toggleDraw()" checked="checked" />Draw
+  </div>
+  <div>
+    <input type="radio" name="toggle-mode" value="erase" (change)="toggleErase()"/>Erase
+  </div>
+  <div id="drawing-spacer"></div>
+  <div>
+    <button type="button" (click)="clearDrawing();">Clear</button>
+  </div>
+</section>
+<section id="sketch-area">
+  <canvas id="sketchpad" width="500" height="500"></canvas>
+</section>
+<section id="submission">
+  <p id="atrament-src">Powered by <a href="https://github.com/jakubfiala/atrament.js" target="blank">Atrament.js</a></p>
+  <div id="submission-spacer"></div>
+  <button type="button" (click)="saveImage()">{{saveButtonName}}</button>  
+</section>
+  

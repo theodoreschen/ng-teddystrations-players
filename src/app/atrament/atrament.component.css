@@ -1,0 +1,26 @@
+canvas {
+  border: 1px solid black;
+}
+
+#drawing-tools {
+  display: flex;
+}
+
+#drawing-spacer {
+  width: 341px;
+}
+
+#submission {
+  display: flex;
+}
+
+#submission-spacer {
+  width: 290px;
+}
+
+p #atrament-src {
+  padding: 0px;
+}
+
+
+

@@ -10,6 +10,8 @@ import { GameMasterComponent } from './game-master/game-master.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AtramentComponent } from './atrament/atrament.component';
 import { GamePlayComponent } from './game-play/game-play.component';
+import { InitialPhraseComponent } from './initial-phrase/initial-phrase.component';
+import { GuessPhraseComponent } from './guess-phrase/guess-phrase.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { GamePlayComponent } from './game-play/game-play.component';
     GameMasterComponent,
     SignInComponent,
     AtramentComponent,
-    GamePlayComponent
+    GamePlayComponent,
+    InitialPhraseComponent,
+    GuessPhraseComponent
   ],
   imports: [
     FormsModule,

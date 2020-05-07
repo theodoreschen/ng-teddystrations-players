@@ -13,5 +13,5 @@
   <p *ngIf="state.state === 'ready' && playerUid !== ''">
     Tell other participants to hurry it up...
   </p>
-  <app-game-play *ngIf="state.state.startsWith('round')"></app-game-play>
+  <app-game-play *ngIf="state.state.startsWith('round')" [state]="state"></app-game-play>
 </div>
