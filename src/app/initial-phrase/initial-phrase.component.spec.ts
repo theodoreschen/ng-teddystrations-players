@@ -1,14 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InitialPhraseComponent } from './initial-phrase.component';
+import { FormsModule } from '@angular/forms';
+import { LoggerService } from '../logger.service';
+import { GameService } from '../game.service';
 
 describe('InitialPhraseComponent', () => {
+  let mockLog, mockGame;
   let component: InitialPhraseComponent;
   let fixture: ComponentFixture<InitialPhraseComponent>;
 
   beforeEach(async(() => {
+    mockLog = jasmine.createSpy();
+    mockGame = jasmine.createSpy();
+
     TestBed.configureTestingModule({
-      declarations: [ InitialPhraseComponent ]
+      imports: [ FormsModule ],
+      declarations: [ InitialPhraseComponent ],
+      providers: [
+        {provide: LoggerService, useValue: mockLog},
+        {provide: GameService, useValue: mockGame}
+      ]
     })
     .compileComponents();
   }));

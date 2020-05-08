@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../game.service';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'initial-phrase',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./initial-phrase.component.css']
 })
 export class InitialPhraseComponent implements OnInit {
+  initialPhrase: string;
 
-  constructor() { }
+  constructor(
+    private log: LoggerService,
+    private game: GameService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+
   }
 
 }

@@ -1,1 +1,7 @@
-<p>initial-phrase works!</p>
+<div>
+  <form (submit)="onSubmit()" #submitForm="ngForm">
+    <label>Enter phrase</label>
+    <input id="initial-phrase" name="initial-phrase" [(ngModel)]="initialPhrase" required />
+    <button type="submit" [disabled]="submitForm.form.invalid">Submit</button>
+  </form>
+</div>
