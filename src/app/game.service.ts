@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { gameServerUrl } from './game-server-url';
-import { GameState, Player } from './game-server-types';
+import { GameState, Player, Content } from './game-server-types';
 import { LoggerService } from './logger.service';
 import { of, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -37,6 +37,17 @@ export class GameService{
       .pipe(
         tap(result => this.log.DEBUG("GameService.addNewPlayer", `Retrieved ${JSON.stringify(result)}`)),
         catchError(this.handleError<any>("GameService.addNewPlayer"))
+      );
+  }
+
+  submitContent(uid: string, content: Content): Observable<any> {
+    return this.http.post(`${gameServerUrl}/${uid}`, content, this.jsonHttpOptions)
+      .pipe(
+        tap(_ => this.log.DEBUG(
+          "GameService.submitContent",
+          `Content for round ${content.round} submitted to ${content.originPlayer}`
+        )),
+        catchError(this.handleError<any>("GameService.submitContent"))
       );
   }
 

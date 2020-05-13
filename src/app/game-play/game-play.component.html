@@ -1,3 +1,3 @@
-<initial-phrase *ngIf="setView() === 'initial'"></initial-phrase>
-<atrament *ngIf="setView() === 'sketch'" [saveButtonName]="'Submit'" (saveImageEmitter)="saveImageHandler($event)"></atrament>
+<initial-phrase *ngIf="setView() === 'initial'" (initialPhraseEmitter)="initialPhraseHandler($event)"></initial-phrase>
+<atrament *ngIf="setView() === 'sketch'" [saveButtonName]="'Submit'" (saveImageEmitter)="contentEmitterHandler($event)"></atrament>
 <guess-phrase *ngIf="setView() === 'guess'"></guess-phrase>

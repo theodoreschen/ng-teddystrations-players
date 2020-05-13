@@ -47,6 +47,7 @@ export class GameMasterComponent implements OnInit, OnDestroy {
         this.pollCounter = count + 1;
       });
     });
+    // this.state = <GameState>{state: "round_active", message: "1"};
   }
 
   stopPolling(): void {

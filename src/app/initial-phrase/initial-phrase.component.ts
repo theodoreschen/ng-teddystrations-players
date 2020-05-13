@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { GameService } from '../game.service';
 import { LoggerService } from '../logger.service';
+import { Content, GameState } from '../game-server-types';
 
 @Component({
   selector: 'initial-phrase',
@@ -8,18 +9,17 @@ import { LoggerService } from '../logger.service';
   styleUrls: ['./initial-phrase.component.css']
 })
 export class InitialPhraseComponent implements OnInit {
+  @Output() initialPhraseEmitter = new EventEmitter<string>();
+
   initialPhrase: string;
 
-  constructor(
-    private log: LoggerService,
-    private game: GameService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-
+    this.initialPhraseEmitter.emit(this.initialPhrase);
   }
 
 }
