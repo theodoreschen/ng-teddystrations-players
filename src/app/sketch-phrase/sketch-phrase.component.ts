@@ -3,29 +3,28 @@ import { GameState } from '../game-server-types';
 import { GameService } from '../game.service';
 
 @Component({
-  selector: 'guess-phrase',
-  templateUrl: './guess-phrase.component.html',
-  styleUrls: ['./guess-phrase.component.css']
+  selector: 'sketch-phrase',
+  templateUrl: './sketch-phrase.component.html',
+  styleUrls: ['./sketch-phrase.component.css']
 })
-export class GuessPhraseComponent implements OnInit {
+export class SketchPhraseComponent implements OnInit {
   @Input() state: GameState;
   @Input() playerUid: string;
-  @Output() guessPhraseEmitter = new EventEmitter<string>();
+  @Output() sketchPhraseEmitter = new EventEmitter<string>();
 
-  guessPhrase: string;
-  previousSketch: string;
+  previousPhrase: string;
 
   constructor(private game: GameService) { }
 
   ngOnInit(): void {
     let round = parseInt(this.state.message);
     this.game.retrieveContent(this.playerUid, round).subscribe(content => {
-      this.previousSketch = content.content;
+      this.previousPhrase = content.content;
     });
   }
 
-  onSubmit(): void {
-    this.guessPhraseEmitter.emit(this.guessPhrase);
+  saveImageHandler(event: string): void {
+    this.sketchPhraseEmitter.emit(event);
   }
 
 }

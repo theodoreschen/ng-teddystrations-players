@@ -1,24 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GuessPhraseComponent } from './guess-phrase.component';
-import { FormsModule } from '@angular/forms';
+import { SketchPhraseComponent } from './sketch-phrase.component';
 import { GameService } from '../game.service';
 import { of } from 'rxjs';
 import { Content } from '../game-server-types';
 
-describe('GuessPhraseComponent', () => {
+describe('SketchPhraseComponent', () => {
   let mockGame;
-  let component: GuessPhraseComponent;
-  let fixture: ComponentFixture<GuessPhraseComponent>;
+  let component: SketchPhraseComponent;
+  let fixture: ComponentFixture<SketchPhraseComponent>;
 
-  let mockContent: Content = <Content>{round: 3, content: "dummy img", originPlayer: "aaaa"};
+  let mockContent: Content = <Content>{round: 1, content: "dummy", originPlayer: "aaaa"};
 
   beforeEach(async(() => {
     mockGame = jasmine.createSpyObj(["retrieveContent"]);
 
     TestBed.configureTestingModule({
-      imports: [ FormsModule ],
-      declarations: [ GuessPhraseComponent ],
+      declarations: [ SketchPhraseComponent ],
       providers: [
         { provide: GameService, useValue: mockGame }
       ]
@@ -27,10 +25,10 @@ describe('GuessPhraseComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GuessPhraseComponent);
+    fixture = TestBed.createComponent(SketchPhraseComponent);
     component = fixture.componentInstance;
-    component.state = {state: "ROUND_ACTIVE", message: "3"};
-    mockGame.retrieveContent.and.returnValue(of());
+    component.state = {state: "ROUND_ACTIVE", message: "1"};
+    mockGame.retrieveContent.and.returnValue(of(mockContent));
     fixture.detectChanges();
   });
 

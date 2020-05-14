@@ -15,5 +15,5 @@ export interface Content {
 }
 
 export interface CompletedRoundsCookie {
-  completedRounds: string[];
+  completedRounds: number[];
 }

@@ -12,6 +12,7 @@ import { AtramentComponent } from './atrament/atrament.component';
 import { GamePlayComponent } from './game-play/game-play.component';
 import { InitialPhraseComponent } from './initial-phrase/initial-phrase.component';
 import { GuessPhraseComponent } from './guess-phrase/guess-phrase.component';
+import { SketchPhraseComponent } from './sketch-phrase/sketch-phrase.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GuessPhraseComponent } from './guess-phrase/guess-phrase.component';
     AtramentComponent,
     GamePlayComponent,
     InitialPhraseComponent,
-    GuessPhraseComponent
+    GuessPhraseComponent,
+    SketchPhraseComponent
   ],
   imports: [
     FormsModule,

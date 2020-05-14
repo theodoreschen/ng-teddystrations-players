@@ -51,6 +51,17 @@ export class GameService{
       );
   }
 
+  retrieveContent(uid: string, round: number): Observable<Content> {
+    return this.http.get<Content>(`${gameServerUrl}/${uid}/${round}`)
+      .pipe(
+        tap(result => this.log.DEBUG(
+          "GameService.retrieveContent",
+          `Content for round ${result.round} received from player ${result.originPlayer}`
+        )),
+        catchError(this.handleError<any>("GameService.retrieveContent"))
+      );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

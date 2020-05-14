@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-// const Atrament = require('atrament');
 import Atrament from 'atrament';
 
 @Component({

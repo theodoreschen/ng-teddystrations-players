@@ -1,1 +1,10 @@
-<p>guess-phrase works!</p>
+<div>
+  <div id="previous-sketch">
+    <img [src]="previousSketch" />
+  </div>
+  <form (submit)="onSubmit()" #submitForm="ngForm">
+    <label for="guess-phrase">Enter guess</label>
+    <input id="guess-phrase" name="guess-phrase" [(ngModel)]="guessPhrase" required />
+    <button type="submit" [disabled]="submitForm.form.invalid">Submit</button>
+  </form>
+</div>

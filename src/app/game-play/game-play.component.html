@@ -1,3 +1,6 @@
 <initial-phrase *ngIf="setView() === 'initial'" (initialPhraseEmitter)="initialPhraseHandler($event)"></initial-phrase>
-<atrament *ngIf="setView() === 'sketch'" [saveButtonName]="'Submit'" (saveImageEmitter)="contentEmitterHandler($event)"></atrament>
-<guess-phrase *ngIf="setView() === 'guess'"></guess-phrase>
+<sketch-phrase *ngIf="setView() == 'sketch'" [state]="state" [playerUid]="playerUid" (sketchPhraseEmitter)="contentEmitterHandler($event)"></sketch-phrase>
+<guess-phrase *ngIf="setView() === 'guess'" [state]="state" [playerUid]="playerUid" (guessPhraseEmitter)="contentEmitterHandler($event)"></guess-phrase>
+<div *ngIf="setView() === 'awaiting-next-round'">
+  <p>Congrats on beating the clock. Waiting for next round to start</p>
+</div>
