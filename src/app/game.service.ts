@@ -26,7 +26,7 @@ export class GameService{
     // return of(<GameState>{state: "ready", message: null});
     return this.http.get<GameState>(`${gameServerUrl}/game-state`)
       .pipe(
-        tap(result => this.log.DEBUG("GameService.fetchGameState", `Retrieved ${JSON.stringify(result)}`)),
+        // tap(result => this.log.DEBUG("GameService.fetchGameState", `Retrieved ${JSON.stringify(result)}`)),
         catchError(this.handleError<any>("GameService.fetchGameState"))
       );
   }
@@ -35,13 +35,13 @@ export class GameService{
     let jsonBody = {name: name};
     return this.http.post<Player>(`${gameServerUrl}/player/add`, jsonBody, this.jsonHttpOptions)
       .pipe(
-        tap(result => this.log.DEBUG("GameService.addNewPlayer", `Retrieved ${JSON.stringify(result)}`)),
+        // tap(result => this.log.DEBUG("GameService.addNewPlayer", `Retrieved ${JSON.stringify(result)}`)),
         catchError(this.handleError<any>("GameService.addNewPlayer"))
       );
   }
 
   submitContent(uid: string, content: Content): Observable<any> {
-    return this.http.post(`${gameServerUrl}/${uid}`, content, this.jsonHttpOptions)
+    return this.http.post(`${gameServerUrl}/player/${uid}/`, content, this.jsonHttpOptions)
       .pipe(
         tap(_ => this.log.DEBUG(
           "GameService.submitContent",
@@ -52,12 +52,12 @@ export class GameService{
   }
 
   retrieveContent(uid: string, round: number): Observable<Content> {
-    return this.http.get<Content>(`${gameServerUrl}/${uid}/${round}`)
+    return this.http.get<Content>(`${gameServerUrl}/player/${uid}/${round}/`)
       .pipe(
-        tap(result => this.log.DEBUG(
-          "GameService.retrieveContent",
-          `Content for round ${result.round} received from player ${result.originPlayer}`
-        )),
+        // tap(result => this.log.DEBUG(
+        //   "GameService.retrieveContent",
+        //   `Content for round ${result.round} received from player ${result.originPlayer}`
+        // )),
         catchError(this.handleError<any>("GameService.retrieveContent"))
       );
   }

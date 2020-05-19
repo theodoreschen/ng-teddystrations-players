@@ -11,6 +11,7 @@ export class GuessPhraseComponent implements OnInit {
   @Input() state: GameState;
   @Input() playerUid: string;
   @Output() guessPhraseEmitter = new EventEmitter<string>();
+  @Output() originPlayerEmitter = new EventEmitter<string>();
 
   guessPhrase: string;
   previousSketch: string;
@@ -21,6 +22,7 @@ export class GuessPhraseComponent implements OnInit {
     let round = parseInt(this.state.message);
     this.game.retrieveContent(this.playerUid, round).subscribe(content => {
       this.previousSketch = content.content;
+      this.originPlayerEmitter.emit(content.originPlayer);
     });
   }
 

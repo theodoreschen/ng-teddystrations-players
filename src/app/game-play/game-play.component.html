@@ -1,6 +1,7 @@
-<initial-phrase *ngIf="setView() === 'initial'" (initialPhraseEmitter)="initialPhraseHandler($event)"></initial-phrase>
-<sketch-phrase *ngIf="setView() == 'sketch'" [state]="state" [playerUid]="playerUid" (sketchPhraseEmitter)="contentEmitterHandler($event)"></sketch-phrase>
-<guess-phrase *ngIf="setView() === 'guess'" [state]="state" [playerUid]="playerUid" (guessPhraseEmitter)="contentEmitterHandler($event)"></guess-phrase>
-<div *ngIf="setView() === 'awaiting-next-round'">
+<p>Making guesses for: {{originPlayer? originPlayer : playerUid}}</p>
+<initial-phrase *ngIf="view === 'initial'" (initialPhraseEmitter)="initialPhraseHandler($event)"></initial-phrase>
+<sketch-phrase *ngIf="view === 'sketch'" [state]="state" [playerUid]="playerUid" (sketchPhraseEmitter)="contentEmitterHandler($event)" (originPlayerEmitter)="originPlayerEmitterHandler($event)"></sketch-phrase>
+<guess-phrase *ngIf="view === 'guess'" [state]="state" [playerUid]="playerUid" (guessPhraseEmitter)="contentEmitterHandler($event)" (originPlayerEmitter)="originPlayerEmitterHandler($event)"></guess-phrase>
+<div *ngIf="view === 'awaiting-next-round'">
   <p>Congrats on beating the clock. Waiting for next round to start</p>
 </div>

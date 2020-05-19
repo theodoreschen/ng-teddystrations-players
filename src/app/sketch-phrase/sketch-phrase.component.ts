@@ -10,7 +10,8 @@ import { GameService } from '../game.service';
 export class SketchPhraseComponent implements OnInit {
   @Input() state: GameState;
   @Input() playerUid: string;
-  @Output() sketchPhraseEmitter = new EventEmitter<string>();
+  @Output() sketchPhraseEmitter = new EventEmitter<string>(); 
+  @Output() originPlayerEmitter = new EventEmitter<string>();
 
   previousPhrase: string;
 
@@ -20,6 +21,7 @@ export class SketchPhraseComponent implements OnInit {
     let round = parseInt(this.state.message);
     this.game.retrieveContent(this.playerUid, round).subscribe(content => {
       this.previousPhrase = content.content;
+      this.originPlayerEmitter.emit(content.originPlayer);
     });
   }
 

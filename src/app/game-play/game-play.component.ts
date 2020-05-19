@@ -1,20 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { LoggerService } from '../logger.service';
 import { GameState, Content, CompletedRoundsCookie } from '../game-server-types';
 import { CookieService } from 'ngx-cookie-service';
 import { GameService } from '../game.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-play',
   templateUrl: './game-play.component.html',
   styleUrls: ['./game-play.component.css']
 })
-export class GamePlayComponent implements OnInit {
+export class GamePlayComponent implements OnInit, OnDestroy {
   @Input() playerUid: string;
   @Input() state: GameState;
 
   originPlayer: string;
   completedRoundsCookie: CompletedRoundsCookie;
+  view: string;
+  currentRound: string;
+
+  statePolling: Subscription;
 
   constructor(
     private log: LoggerService,
@@ -23,14 +28,28 @@ export class GamePlayComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.log.DEBUG("GamePlayComponent.ngOnInit", JSON.stringify(this.state));
+    this.currentRound = this.state.message;
+
     if (this.state.message === "1") {
       this.cookie.delete("tedstrations-rounds-complete");
       this.completedRoundsCookie = <CompletedRoundsCookie>{completedRounds: <number[]>[]};
     } else {
-      let rounds = this.cookie.get("tedstrations-rounds-complete");
       // TODO: map the output of the JSON.parse into CompletedRoundsCookie interface
-      this.completedRoundsCookie = JSON.parse(rounds);
+      this.completedRoundsCookie = JSON.parse(this.cookie.get("tedstrations-rounds-complete"));
     }
+    this.setView();
+
+    this.statePolling = interval(1000).subscribe(_ => {
+      if (this.state.message !== this.currentRound) {
+        this.currentRound = this.state.message;
+        this.setView();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.statePolling.unsubscribe();
   }
 
   initialPhraseHandler(event: string): void {
@@ -43,7 +62,10 @@ export class GamePlayComponent implements OnInit {
     };
     this.game.submitContent(this.playerUid, content).subscribe(_ => {
       this.completedRoundsCookie.completedRounds.push(gameRound);
+      console.log(JSON.stringify(this.completedRoundsCookie));
       this.cookie.set("tedstrations-rounds-complete", JSON.stringify(this.completedRoundsCookie), 1);
+      this.setView();
+      console.log(this.view);
     });
   }
 
@@ -58,22 +80,34 @@ export class GamePlayComponent implements OnInit {
     this.game.submitContent(this.playerUid, content).subscribe(_ => {
       this.completedRoundsCookie.completedRounds.push(gameRound);
       this.cookie.set("tedstrations-rounds-complete", JSON.stringify(this.completedRoundsCookie), 1);
+      this.setView();
     });
+  }
+
+  originPlayerEmitterHandler(event: string): void {
+    this.originPlayer = event;
   }
 
   private awaitNextRound(): boolean {
     let gameRound = parseInt(this.state.message);
-    let idx = this.completedRoundsCookie.completedRounds.findIndex(value => gameRound == value);
+    let idx = this.completedRoundsCookie.completedRounds.findIndex(value => value === gameRound);
     if (idx === -1) return false;
     else return true;
   }
 
-  setView(): string {
-    if (this.state.message === "1") return "initial";
-    if (this.awaitNextRound()) return "awaiting-next-round";
+  private setView(): void {
+    if (this.awaitNextRound()) {
+      this.view = "awaiting-next-round";
+      return
+    }
 
-    if (parseInt(this.state.message) % 2 === 0) return "sketch";
-    else return "guess"
+    if (this.state.message === "1") {
+      this.view = "initial";
+      return
+    }
+
+    if ((parseInt(this.state.message) % 2) === 0) this.view = "sketch";
+    else this.view = "guess";
   }
 
 }

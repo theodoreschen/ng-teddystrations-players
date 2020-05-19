@@ -4,6 +4,7 @@
   </button>
   <span>&nbsp;Poll attempts: {{pollCounter}}</span>
   <p *ngIf="state">Current state: {{state.state}}</p>
+  <p>Player UUID: {{playerUid}}</p>
 </div>
 <div *ngIf="state">
   <p *ngIf="state.state === 'unauthenticated'">Awaiting game to start...</p>
@@ -14,4 +15,7 @@
     Tell other participants to hurry it up...
   </p>
   <app-game-play *ngIf="state.state.startsWith('round')" [state]="state" [playerUid]="playerUid"></app-game-play>
+  <p *ngIf="state.state.startsWith('viewing')">
+    Laugh at results...
+  </p>
 </div>
