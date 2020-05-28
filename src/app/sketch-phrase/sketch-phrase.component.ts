@@ -15,9 +15,13 @@ export class SketchPhraseComponent implements OnInit {
 
   previousPhrase: string;
 
+  sketchpadSize: number;
+
   constructor(private game: GameService) { }
 
   ngOnInit(): void {
+    this.sketchpadSize = window.innerWidth * 0.9;
+
     let round = parseInt(this.state.message);
     this.game.retrieveContent(this.playerUid, round).subscribe(content => {
       this.previousPhrase = content.content;
