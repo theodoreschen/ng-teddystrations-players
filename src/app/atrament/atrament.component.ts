@@ -9,7 +9,10 @@ import Atrament from 'atrament';
 export class AtramentComponent implements OnInit {
   sketchpad: any;
 
+  @Input() sketchWidth: number = 500;
+  @Input() sketchHeight: number = 500;
   @Input() saveButtonName: string;
+
   @Output() saveImageEmitter = new EventEmitter<string>();
 
   constructor() { }
@@ -26,7 +29,7 @@ export class AtramentComponent implements OnInit {
 
   toggleDraw(): void {
     this.sketchpad.mode = "draw";
-    this.sketchpad.weight = 5;
+    this.sketchpad.weight = 3;
   }
 
   toggleErase(): void {

@@ -1,23 +1,23 @@
-<div>
-  <section id="drawing-tools">
-    <div>
-      <input type="radio" name="toggle-mode" value="draw" (change)="toggleDraw()" checked="checked" />Draw
+<div id="atrament">
+  <section id="editor-bar">
+    <div id="drawing-tools">
+      <div>
+        <input type="radio" name="toggle-mode" value="draw" (change)="toggleDraw()" checked="checked" />Draw
+      </div>
+      <div>
+        <input type="radio" name="toggle-mode" value="erase" (change)="toggleErase()" />Erase
+      </div>
+      <div id="clear-button">
+        <button class="btn" type="button" (click)="clearDrawing();">Clear</button>
+      </div>
     </div>
-    <div>
-      <input type="radio" name="toggle-mode" value="erase" (change)="toggleErase()" />Erase
-    </div>
-    <div id="drawing-spacer"></div>
-    <div>
-      <button type="button" (click)="clearDrawing();">Clear</button>
+    <div id="submit-button">
+      <button class="btn" type="button" (click)="saveImage()">{{saveButtonName}}</button>
     </div>
   </section>
   <section id="sketch-area">
-    <canvas id="sketchpad" width="500" height="500"></canvas>
+    <canvas id="sketchpad" [width]="sketchWidth" [height]="sketchHeight"></canvas>
   </section>
-  <section id="submission">
-    <p id="atrament-src">Powered by <a href="https://github.com/jakubfiala/atrament.js" target="blank">Atrament.js</a>
-    </p>
-    <div id="submission-spacer"></div>
-    <button type="button" (click)="saveImage()">{{saveButtonName}}</button>
-  </section>
+  <p id="atrament-src">Powered by <a href="https://github.com/jakubfiala/atrament.js" target="blank">Atrament.js</a>
+  </p>
 </div>

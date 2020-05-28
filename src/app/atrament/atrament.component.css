@@ -2,25 +2,32 @@ canvas {
   border: 1px solid black;
 }
 
+#atrament {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #drawing-tools {
   display: flex;
+  justify-content: flex-start;
 }
 
-#drawing-spacer {
-  width: 341px;
-}
-
-#submission {
+#editor-bar {
   display: flex;
-}
-
-#submission-spacer {
-  width: 290px;
+  justify-content: space-between;
 }
 
 p #atrament-src {
   padding: 0px;
 }
 
+#clear-button {
+  margin-left: 10px;
+}
+
+#submit-button {
+  margin-left: 10px;
+}
 
 
