@@ -11,15 +11,15 @@ export class AtramentComponent implements OnInit {
 
   @Input() sketchWidth: number = 500;
   @Input() sketchHeight: number = 500;
-  @Input() saveButtonName: string;
+  @Input() saveButtonName: string = '';
 
   @Output() saveImageEmitter = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.saveButtonName === "") this.saveButtonName = "Save";
-    let canvas = document.querySelector("#sketchpad");
+    if (this.saveButtonName === '') this.saveButtonName = 'Save';
+    let canvas = document.querySelector('#sketchpad');
     this.sketchpad = new Atrament(canvas);
   }
 
@@ -28,12 +28,12 @@ export class AtramentComponent implements OnInit {
   }
 
   toggleDraw(): void {
-    this.sketchpad.mode = "draw";
+    this.sketchpad.mode = 'draw';
     this.sketchpad.weight = 3;
   }
 
   toggleErase(): void {
-    this.sketchpad.mode = "erase";
+    this.sketchpad.mode = 'erase';
     this.sketchpad.weight = 15;
   }
 

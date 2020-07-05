@@ -43,10 +43,10 @@ export class GameService{
   submitContent(uid: string, content: Content): Observable<any> {
     return this.http.post(`${gameServerUrl}/player/${uid}/`, content, this.jsonHttpOptions)
       .pipe(
-        tap(_ => this.log.DEBUG(
-          "GameService.submitContent",
-          `Content for round ${content.round} submitted to ${content.originPlayer}`
-        )),
+        // tap(_ => this.log.DEBUG(
+        //   "GameService.submitContent",
+        //   `Content for round ${content.round} submitted to ${content.originPlayer}`
+        // )),
         catchError(this.handleError<any>("GameService.submitContent"))
       );
   }
